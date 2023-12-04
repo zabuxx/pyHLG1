@@ -22,7 +22,11 @@ start_time = time.time()
 
 hlg = HLG1(args.serial_device, args.baud)
 
+hlg.set_buffering_rate(1)
+
+hlg.get_buffer_rate()
 hlg.get_sampling_cycle()
+
 hlg.set_buffering_operation(start=True)
 hlg.get_buffering_operation()
 hlg.get_buffering_status()

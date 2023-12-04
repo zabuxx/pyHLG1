@@ -224,8 +224,26 @@ class HLG1:
 
         
         return int(output[9:13].decode("ASCII"))
+
+    def get_buffer_rate(self):
+        logging.info("Buffer rate= ")
+
+        self.snd_cmd("RBR")
+        output = self.rcv_output()
+
+        logging.info("  " + str(int(output[8:13].decode("ASCII"))))
+
+        return int(output[8:13].decode("ASCII"))
+
+    def set_buffering_rate(self, rate):
+        logging.info("Setting buffer rate to " + str(rate))
+        self.snd_cmd("WBR", str(rate).zfill(5))
+        output = self.rcv_output()
+
+        if(self.check_error(output)):
+            return
+
         
-    
     def read_data(self):
         logging.info("Setting read data")
         
@@ -249,4 +267,4 @@ class HLG1:
 
         return output_int_lst
 
-        
+
